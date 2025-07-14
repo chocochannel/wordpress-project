@@ -7,7 +7,7 @@
         </div>
         <div class="ai-card-content">
           <h2 class="ai-card-title">AIカードタイトル<?php echo $i+1; ?></h2>
-          <p class="ai-card-desc">これはモダンで複雑なAIカードの説明文です。デザインや動きもかっこよく仕上げています。</p>
+          <div class="ai-card-desc"><?php the_content(); ?></div>
           <a href="#" class="ai-card-btn">詳細を見る</a>
         </div>
       </div>
