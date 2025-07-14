@@ -1,0 +1,29 @@
+body {
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, 'メイリオ', sans-serif;
+  background: linear-gradient(135deg, #181c2b 0%, #232946 100%);
+  color: #f4f4f4;
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #eebf3f;
+  margin-top: 0;
+}
+
+a {
+  color: #3be8b0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #eebf3f;
+}
+
+.ai-card-main {
+  padding: 60px 0 40px 0;
+  background: transparent;
+  min-height: 80vh;
+} 
