@@ -2,10 +2,10 @@
 <main class="single-post-main">
   <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
     <article class="single-post">
-      <!-- 記事タイトル（※このWordPress関数は変更しないでください） -->
+      <!-- 記事タイトル -->
       <h1 class="single-post-title"><?php the_title(); ?></h1>
       
-      <!-- 記事メタ情報（日付、カテゴリなど） -->
+      <!-- 記事メタ情報（日付、カテゴリ） -->
       <div class="single-post-meta">
         <span class="post-date"><?php echo get_the_date(); ?></span>
         <?php if ( has_category() ) : ?>
@@ -20,25 +20,29 @@
         </div>
       <?php endif; ?>
       
-      <!-- ※重要：個別記事ページでは必ず記事の全文（the_content）を表示すること -->
-      <!-- ※AI変更時注意：このWordPress関数（the_content）は変更しないでください -->
+      <!-- 記事本文 -->
       <div class="single-post-content">
         <?php the_content(); ?>
       </div>
       
-      <!-- 前後の記事へのナビゲーション -->
+      <!-- 前後の記事ナビゲーション -->
       <?php
+      function my_theme_post_navigation() {
         $prev_link = get_previous_post_link('%link', '← 前の記事');
         $next_link = get_next_post_link('%link', '次の記事 →');
+        if ($prev_link || $next_link) {
+          echo '<div class="single-post-navigation">';
+          if ($prev_link) {
+            echo '<div class="nav-previous">' . $prev_link . '</div>';
+          }
+          if ($next_link) {
+            echo '<div class="nav-next">' . $next_link . '</div>';
+          }
+          echo '</div>';
+        }
+      }
+      my_theme_post_navigation();
       ?>
-      <div class="single-post-navigation">
-        <?php if ($prev_link): ?>
-          <div class="nav-previous"><?php echo $prev_link; ?></div>
-        <?php endif; ?>
-        <?php if ($next_link): ?>
-          <div class="nav-next"><?php echo $next_link; ?></div>
-        <?php endif; ?>
-      </div>
     </article>
   <?php endwhile; else: ?>
     <p>記事が見つかりません。</p>

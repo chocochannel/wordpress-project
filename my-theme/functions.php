@@ -12,22 +12,22 @@ function my_theme_enqueue_scripts() {
 }
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_scripts'); 
 
-// SEOに配慮したテーマ機能の有効化
+// テーマ機能の有効化（SEOも考慮）
 function my_theme_setup() {
-    // 1. アイキャッチ画像
+    // アイキャッチ画像
     add_theme_support('post-thumbnails');
-    // 2. タイトルタグ自動出力
+    // タイトルタグ自動出力
     add_theme_support('title-tag');
-    // 3. HTML5マークアップ
+    // HTML5マークアップ
     add_theme_support('html5', array('search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script'));
-    // 4. カスタムロゴ
+    // カスタムロゴ
     add_theme_support('custom-logo', array(
         'height'      => 80,
         'width'       => 240,
         'flex-height' => true,
         'flex-width'  => true,
     ));
-    // 5. RSSフィードリンク自動挿入
+    // RSSフィードリンク自動挿入
     add_theme_support('automatic-feed-links');
 }
 add_action('after_setup_theme', 'my_theme_setup');

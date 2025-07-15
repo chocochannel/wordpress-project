@@ -5,38 +5,42 @@
     <?php while ( have_posts() ) : the_post(); ?>
       <?php the_content(); ?>
     <?php endwhile; ?>
+    <?php wp_reset_postdata(); ?>
   </section>
 
   <!-- 投稿一覧をカード型で表示するセクション -->
-  <section class="card-section">
-    <div class="card-grid">
-      <?php
-      $args = array(
-        'post_type' => 'post',
-        'posts_per_page' => 10,
-        'post_status' => 'publish'
-      );
-      $front_query = new WP_Query($args);
-      if ( $front_query->have_posts() ) :
-        while ( $front_query->have_posts() ) : $front_query->the_post(); ?>
-          <a href="<?php the_permalink(); ?>" class="ai-card" style="text-decoration:none; color:inherit; display:block;">
-            <div class="ai-card-image">
-              <?php if ( has_post_thumbnail() ) : ?>
-                <?php the_post_thumbnail('large'); ?>
-              <?php else: ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/sample1.jpg" alt="No Image">
-              <?php endif; ?>
-            </div>
-            <div class="ai-card-content">
-              <h2 class="ai-card-title"><?php the_title(); ?></h2>
-              <p class="ai-card-desc"><?php echo wp_trim_words(get_the_excerpt(), 30, '...'); ?></p>
-              <span class="ai-card-btn">詳細を見る</span>
-            </div>
-          </a>
-      <?php endwhile; wp_reset_postdata(); else: ?>
-        <p>投稿がありません。</p>
-      <?php endif; ?>
-    </div>
-  </section>
+  <?php
+  function my_theme_frontpage_posts($count = 10) {
+    $args = array(
+      'post_type' => 'post',
+      'posts_per_page' => $count,
+      'post_status' => 'publish'
+    );
+    $front_query = new WP_Query($args);
+    if ( $front_query->have_posts() ) {
+      echo '<section class="card-section"><div class="card-grid">';
+      while ( $front_query->have_posts() ) : $front_query->the_post();
+        echo '<a href="' . get_the_permalink() . '" class="ai-card" style="text-decoration:none; color:inherit; display:block;">';
+        echo '<div class="ai-card-image">';
+        if ( has_post_thumbnail() ) {
+          the_post_thumbnail('large');
+        } else {
+          echo '<img src="' . get_template_directory_uri() . '/assets/images/sample1.jpg" alt="No Image">';
+        }
+        echo '</div>';
+        echo '<div class="ai-card-content">';
+        echo '<h2 class="ai-card-title">' . get_the_title() . '</h2>';
+        echo '<p class="ai-card-desc">' . wp_trim_words(get_the_excerpt(), 30, '...') . '</p>';
+        echo '<span class="ai-card-btn">詳細を見る</span>';
+        echo '</div></a>';
+      endwhile;
+      echo '</div></section>';
+      wp_reset_postdata();
+    } else {
+      echo '<section class="card-section"><p>投稿がありません。</p></section>';
+    }
+  }
+  my_theme_frontpage_posts(10);
+  ?>
 </main>
 <?php get_footer(); ?> 
