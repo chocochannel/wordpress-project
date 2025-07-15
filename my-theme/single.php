@@ -27,9 +27,17 @@
       </div>
       
       <!-- 前後の記事へのナビゲーション -->
+      <?php
+        $prev_link = get_previous_post_link('%link', '← 前の記事');
+        $next_link = get_next_post_link('%link', '次の記事 →');
+      ?>
       <div class="single-post-navigation">
-        <div class="nav-previous"><?php previous_post_link('%link', '← 前の記事'); ?></div>
-        <div class="nav-next"><?php next_post_link('%link', '次の記事 →'); ?></div>
+        <?php if ($prev_link): ?>
+          <div class="nav-previous"><?php echo $prev_link; ?></div>
+        <?php endif; ?>
+        <?php if ($next_link): ?>
+          <div class="nav-next"><?php echo $next_link; ?></div>
+        <?php endif; ?>
       </div>
     </article>
   <?php endwhile; else: ?>
