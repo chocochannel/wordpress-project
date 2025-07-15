@@ -2,7 +2,7 @@
 <main class="single-post-main">
   <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
     <article class="single-post">
-      <!-- 記事タイトル -->
+      <!-- 記事タイトル（※このWordPress関数は変更しないでください） -->
       <h1 class="single-post-title"><?php the_title(); ?></h1>
       
       <!-- 記事メタ情報（日付、カテゴリなど） -->
@@ -21,6 +21,7 @@
       <?php endif; ?>
       
       <!-- ※重要：個別記事ページでは必ず記事の全文（the_content）を表示すること -->
+      <!-- ※AI変更時注意：このWordPress関数（the_content）は変更しないでください -->
       <div class="single-post-content">
         <?php the_content(); ?>
       </div>
